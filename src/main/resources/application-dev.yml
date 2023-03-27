@@ -10,9 +10,9 @@ spring:
     password: 123456
 
   datasource:
-    url: jdbc:oracle:thin:@14.29.115.237:1799/xfdb
-    username: xfnew
-    password: xfnew
+    url: jdbc:oracle:thin:@127.0.0.1:1799/xfdb
+    username: test
+    password: test
     driver-class-name: oracle.jdbc.OracleDriver
 
 # 数据库中很多直接使用的驼峰命名，关闭驼峰转下划线自动转换
