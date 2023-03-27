@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinfor.demo.mapper.TsUserMapper">
+
+    <select id="loadXfUserByUserId" resultType="com.sinfor.demo.session.XfUser">
+        select ta.userid,
+               ta.siteid,
+               ta.username,
+               ta.password,
+               ta.contdept,
+               ta.enabled,
+               ta.deptid,
+               ta.hardbind       hardbind,
+               tb.typeid         siteTypeId,
+               tb.siteName,
+               tb.paysite        paySiteId,
+               tb.custservid,
+               tb.paycenter      payCenterId,
+               tb.ofsite         ofSiteId,
+               tb.qday           siteQDay,
+               tc.deptname       contdeptName,
+               tc.levelid,
+               tc.conpaysite     parentContdept,
+               tc.conpaysitename parentContdeptName,
+               td.dictname       deptname,
+               te.isbaruser,
+               null              centerid
+        from TS_USER ta
+                 left join ts_Siteinfo tb on ta.SiteID = tb.SiteID
+                 left join ts_Dept tc on ta.SiteID = tc.SiteID and ta.contdept = tc.DeptID and tc.flag = 1
+                 left join ts_dict td on td.typeid = '1001' and ta.deptid = td.dictid
+                 left join tbemployeeinfo te on ta.userid = te.empid
+        where ta.userid = #{userId}
+    </select>
+</mapper>
